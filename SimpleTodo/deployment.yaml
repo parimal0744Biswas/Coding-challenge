@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simpletodo-deployment
+  labels:
+    app: todoapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todoapp
+  template:
+    metadata:
+      labels:
+        app: todoapp
+    spec:
+      containers:
+      - name: simpletodo-container
+        image: app:latest # Specify the Docker image name and tag
+        ports:
+        - containerPort: 8080
