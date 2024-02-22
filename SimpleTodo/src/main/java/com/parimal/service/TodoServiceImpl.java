@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 import com.parimal.entity.Todo;
 import com.parimal.repository.TodoRepo;
 
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@Log4j2
 public class TodoServiceImpl implements TodoService
 {
 
@@ -35,6 +38,7 @@ public class TodoServiceImpl implements TodoService
 	@Override
 	public Todo updateTodo(Long id, @Valid Todo todo)
 	{
+
 		Todo existingTodo = todoRepository.findById(id).orElse(null);
 		if (existingTodo == null)
 		{
@@ -48,6 +52,8 @@ public class TodoServiceImpl implements TodoService
 	@Override
 	public Todo getTodoById(Long id)
 	{
+		// log.error("message --> : {}", id);
+
 		return todoRepository.findById(id).orElse(null);
 	}
 
@@ -64,7 +70,8 @@ public class TodoServiceImpl implements TodoService
 		if (search != null && !search.isEmpty())
 		{
 			return todoRepository.findByTitleContainingIgnoreCase(search, pageRequest);
-		} else
+		}
+		else
 		{
 			return todoRepository.findAll(pageRequest);
 		}
