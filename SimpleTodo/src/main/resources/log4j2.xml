@@ -1,22 +1,14 @@
-<?xml version="1.0" encoding="US-ASCII"?>
-<Configuration status="warn" strict="true" name="SimpleTodo" packages="com.parimal" jmxDisabled="true">
-
-	<Appenders>
-		<Appender type="Console" name="STDOUT">
-			<Layout type="PatternLayout" pattern="%d{HH:mm:ss.SSS} %-5p %l - %msg%n" />
-		</Appender>
-	</Appenders>
-
-	<Loggers>
-		
-		<Logger name="log" level="trace" additivity="false">
-			<AppenderRef ref="STDOUT" />
-		</Logger>
-
-		<Root level="warn">
-			<AppenderRef ref="STDOUT" />
-		</Root>
-	</Loggers>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="log4j2.xsd" status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
 </Configuration>
-

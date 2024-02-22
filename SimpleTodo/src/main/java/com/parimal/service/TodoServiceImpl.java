@@ -15,10 +15,14 @@ import com.parimal.repository.TodoRepo;
 
 import lombok.extern.log4j.Log4j2;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 @Log4j2
 public class TodoServiceImpl implements TodoService
 {
+    private static final Logger logger = LoggerFactory.getLogger(TodoServiceImpl.class);
 
 	@Autowired
 	private TodoRepo todoRepository;
@@ -32,6 +36,7 @@ public class TodoServiceImpl implements TodoService
 	@Override
 	public Todo createTodo(@Valid Todo todo)
 	{
+		logger.info("inserting tittle-> : {}", todo.getTitle());
 		return todoRepository.save(todo);
 	}
 
@@ -46,14 +51,13 @@ public class TodoServiceImpl implements TodoService
 		}
 		existingTodo.setTitle(todo.getTitle());
 		existingTodo.setCompleted(todo.isCompleted());
+		
 		return todoRepository.save(existingTodo);
 	}
 
 	@Override
 	public Todo getTodoById(Long id)
 	{
-		// log.error("message --> : {}", id);
-
 		return todoRepository.findById(id).orElse(null);
 	}
 
