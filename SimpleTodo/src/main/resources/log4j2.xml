@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="US-ASCII"?>
 <Configuration status="warn" strict="true" name="SimpleTodo" packages="com.parimal" jmxDisabled="true">
 
@@ -18,5 +19,5 @@
 		</Root>
 	</Loggers>
 
-</Configuration>
 
+</Configuration>

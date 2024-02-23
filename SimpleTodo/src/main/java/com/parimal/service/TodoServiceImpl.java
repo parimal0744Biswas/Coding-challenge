@@ -16,11 +16,16 @@ import com.parimal.repository.TodoRepo;
 
 import lombok.extern.log4j.Log4j2;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 @Log4j2
 public class TodoServiceImpl implements TodoService
 {
+
 	private static final Logger logger = LoggerFactory.getLogger(TodoServiceImpl.class);
+
 
 	@Autowired
 	private TodoRepo todoRepository;
@@ -36,6 +41,7 @@ public class TodoServiceImpl implements TodoService
 	public Todo createTodo(@Valid Todo todo)
 	{
 		logger.info("create Todo --> : {}", todo);
+
 		return todoRepository.save(todo);
 	}
 
@@ -48,6 +54,7 @@ public class TodoServiceImpl implements TodoService
 
 		existingTodo.setTitle(todo.getTitle());
 		existingTodo.setCompleted(todo.isCompleted());
+		
 		return todoRepository.save(existingTodo);
 	}
 
@@ -56,6 +63,7 @@ public class TodoServiceImpl implements TodoService
 	{
 		logger.info("Todo id --> : {}", id);
 		return todoRepository.findById(id).orElseThrow(() -> new TodoException("Todo not found with this id : " + id));
+
 	}
 
 	@Override
