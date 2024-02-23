@@ -69,4 +69,16 @@ public class TodoController
 		return todoService.paginationandSorting(page, size, sort);
 	}
 
+	@GetMapping("/search")
+	public List<Todo> searchTodos(@RequestParam(required = false) String searchTerm)
+	{
+		return todoService.searchTodos(searchTerm);
+	}
+
+	@GetMapping("/completed")
+	public List<Todo> getCompletedTodos(@RequestParam(defaultValue = "true") boolean completed)
+	{
+		return todoService.getTodosByCompletion(completed);
+	}
+
 }

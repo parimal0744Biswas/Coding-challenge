@@ -73,7 +73,7 @@ public class TodoServiceImpl implements TodoService
 	}
 
 	@Override
-	public Page<Todo> paginationandSorting(int page, int size, boolean sort) // String search
+	public Page<Todo> paginationandSorting(int page, int size, boolean sort)
 	{
 		Pageable pageable;
 		if (sort == true)
@@ -87,6 +87,22 @@ public class TodoServiceImpl implements TodoService
 		return todoRepository.findAll(pageable);
 
 		// return new PageImpl<>(null);
+	}
+
+	@Override
+	public List<Todo> searchTodos(String searchTerm)
+	{
+		if (searchTerm == null || searchTerm.isEmpty())
+		{
+			throw new TodoException("Search term must be provided");
+		}
+		return todoRepository.findByTitleContainingIgnoreCase(searchTerm);
+	}
+
+	@Override
+	public List<Todo> getTodosByCompletion(boolean completed)
+	{
+		return todoRepository.findByCompleted(completed);
 	}
 
 }

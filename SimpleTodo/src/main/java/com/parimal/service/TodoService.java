@@ -23,4 +23,8 @@ public interface TodoService
 	void deleteTodoById(Long id);
 
 	Page<Todo> paginationandSorting(int page, int size, boolean sort);
+
+	List<Todo> searchTodos(String searchTerm);
+
+	List<Todo> getTodosByCompletion(boolean completed);
 }
