@@ -43,10 +43,6 @@ public class TodoController
 	public ResponseEntity<Todo> updateTodo(@PathVariable Long id, @Valid @RequestBody Todo todo)
 	{
 		Todo updatedTodo = todoService.updateTodo(id, todo);
-		if (updatedTodo == null)
-		{
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
 		return ResponseEntity.ok(updatedTodo);
 	}
 
@@ -54,23 +50,14 @@ public class TodoController
 	public ResponseEntity<Todo> getTodoById(@PathVariable Long id)
 	{
 		Todo todo = todoService.getTodoById(id);
-		if (todo == null)
-		{
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
 		return ResponseEntity.ok(todo);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteTodoById(@PathVariable Long id)
 	{
-		Todo todo = todoService.getTodoById(id);
-		if (todo == null)
-		{
-			return new ResponseEntity<>("no todo found", HttpStatus.NOT_FOUND);
-		}
 		todoService.deleteTodoById(id);
-		return new ResponseEntity<>("todo deleted !", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>("todo deleted !", HttpStatus.OK);
 	}
 
 }
