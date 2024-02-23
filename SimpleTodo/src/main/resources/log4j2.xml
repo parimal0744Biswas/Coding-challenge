@@ -3,7 +3,7 @@
 
 	<Appenders>
 		<Appender type="Console" name="STDOUT">
-			<Layout type="PatternLayout" pattern="%d{HH:mm:ss.SSS} %-5p %l - %msg%n" />
+			<Layout type="PatternLayout" pattern="%d{HH:mm:ss.SSS}  %msg%n" />
 		</Appender>
 	</Appenders>
 

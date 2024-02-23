@@ -51,4 +51,10 @@ public class Todo
 		this.completed = completed;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "Todo [id=" + id + ", title=" + title + ", completed=" + completed + "]";
+	}
+
 }

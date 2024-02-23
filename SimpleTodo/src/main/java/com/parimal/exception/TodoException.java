@@ -1,6 +1,6 @@
 package com.parimal.exception;
 
-public class TodoException extends Exception
+public class TodoException extends RuntimeException
 {
 
 	public TodoException()

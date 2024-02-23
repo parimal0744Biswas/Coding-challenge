@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.parimal.entity.Todo;
+import com.parimal.exception.TodoException;
 import com.parimal.repository.TodoRepo;
 
 import lombok.extern.log4j.Log4j2;
@@ -19,6 +22,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class TodoServiceImpl implements TodoService
 {
+	private static final Logger logger = LoggerFactory.getLogger(TodoServiceImpl.class);
 
 	@Autowired
 	private TodoRepo todoRepository;
@@ -26,24 +30,24 @@ public class TodoServiceImpl implements TodoService
 	@Override
 	public List<Todo> getAllTodos()
 	{
+		logger.info("Get all todos --> : {}", todoRepository.findAll());
 		return todoRepository.findAll();
 	}
 
 	@Override
 	public Todo createTodo(@Valid Todo todo)
 	{
+		logger.info("create Todo --> : {}", todo);
 		return todoRepository.save(todo);
 	}
 
 	@Override
 	public Todo updateTodo(Long id, @Valid Todo todo)
 	{
+		logger.info("update Todo with id --> : {} - {}", todo, id);
+		Todo existingTodo = todoRepository.findById(id)
+				.orElseThrow(() -> new TodoException("Todo not found with this id : " + id));
 
-		Todo existingTodo = todoRepository.findById(id).orElse(null);
-		if (existingTodo == null)
-		{
-			return null; // or throw exception
-		}
 		existingTodo.setTitle(todo.getTitle());
 		existingTodo.setCompleted(todo.isCompleted());
 		return todoRepository.save(existingTodo);
@@ -52,14 +56,14 @@ public class TodoServiceImpl implements TodoService
 	@Override
 	public Todo getTodoById(Long id)
 	{
-		// log.error("message --> : {}", id);
-
-		return todoRepository.findById(id).orElse(null);
+		logger.info("Todo id --> : {}", id);
+		return todoRepository.findById(id).orElseThrow(() -> new TodoException("Todo not found with this id : " + id));
 	}
 
 	@Override
 	public void deleteTodoById(Long id)
 	{
+		todoRepository.findById(id).orElseThrow(() -> new TodoException("Todo not found with this id : " + id));
 		todoRepository.deleteById(id);
 	}
 
@@ -70,8 +74,7 @@ public class TodoServiceImpl implements TodoService
 		if (search != null && !search.isEmpty())
 		{
 			return todoRepository.findByTitleContainingIgnoreCase(search, pageRequest);
-		}
-		else
+		} else
 		{
 			return todoRepository.findAll(pageRequest);
 		}
