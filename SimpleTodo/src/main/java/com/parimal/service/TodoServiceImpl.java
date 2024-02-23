@@ -7,6 +7,10 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.parimal.entity.Todo;
@@ -68,11 +72,21 @@ public class TodoServiceImpl implements TodoService
 		todoRepository.deleteById(id);
 	}
 
-	/*
-	 * @Override public Page<Todo> getAllTodos(int page, int size, String[] sort,
-	 * String search) {
-	 * 
-	 * }
-	 */
+	@Override
+	public Page<Todo> paginationandSorting(int page, int size, boolean sort) // String search
+	{
+		Pageable pageable;
+		if (sort == true)
+		{
+			pageable = PageRequest.of(page, size, Sort.by("title").descending());
+		} else
+		{
+			pageable = PageRequest.of(page, size, Sort.by("title").ascending());
+		}
+
+		return todoRepository.findAll(pageable);
+
+		// return new PageImpl<>(null);
+	}
 
 }

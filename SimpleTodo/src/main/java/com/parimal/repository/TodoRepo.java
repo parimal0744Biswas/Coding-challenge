@@ -11,4 +11,6 @@ import com.parimal.entity.Todo;
 public interface TodoRepo extends JpaRepository<Todo, Long>
 {
 	Page<Todo> findByTitleContainingIgnoreCase(String title, Pageable pageable);
+
+	Page<Todo> findAll(Pageable pageable);
 }

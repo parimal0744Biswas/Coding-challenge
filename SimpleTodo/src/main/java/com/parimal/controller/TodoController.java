@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.parimal.entity.Todo;
@@ -58,6 +60,13 @@ public class TodoController
 	{
 		todoService.deleteTodoById(id);
 		return new ResponseEntity<>("todo deleted !", HttpStatus.OK);
+	}
+
+	@GetMapping("/paging")
+	public Page<Todo> getPaginatedAndSortedTodos(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "2") int size, @RequestParam(defaultValue = "false") boolean sort)
+	{
+		return todoService.paginationandSorting(page, size, sort);
 	}
 
 }
