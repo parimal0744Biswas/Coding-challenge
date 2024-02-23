@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.parimal.entity.Todo;
@@ -22,5 +21,5 @@ public interface TodoService
 
 	void deleteTodoById(Long id);
 
-	Page<Todo> getAllTodos(int page, int size, String[] sort, String search);
+	// Page<Todo> getAllTodos(int page, int size, String[] sort, String search);
 }

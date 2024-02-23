@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.parimal.entity.Todo;
@@ -16,16 +15,12 @@ import com.parimal.repository.TodoRepo;
 
 import lombok.extern.log4j.Log4j2;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Service
 @Log4j2
 public class TodoServiceImpl implements TodoService
 {
 
 	private static final Logger logger = LoggerFactory.getLogger(TodoServiceImpl.class);
-
 
 	@Autowired
 	private TodoRepo todoRepository;
@@ -54,7 +49,7 @@ public class TodoServiceImpl implements TodoService
 
 		existingTodo.setTitle(todo.getTitle());
 		existingTodo.setCompleted(todo.isCompleted());
-		
+
 		return todoRepository.save(existingTodo);
 	}
 
@@ -73,10 +68,11 @@ public class TodoServiceImpl implements TodoService
 		todoRepository.deleteById(id);
 	}
 
-	@Override
-	public Page<Todo> getAllTodos(int page, int size, String[] sort, String search)
-	{
-
-	}
+	/*
+	 * @Override public Page<Todo> getAllTodos(int page, int size, String[] sort,
+	 * String search) {
+	 * 
+	 * }
+	 */
 
 }
