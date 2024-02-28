@@ -70,6 +70,7 @@ public class TodoServiceImpl implements TodoService
 	{
 		todoRepository.findById(id).orElseThrow(() -> new TodoException("Todo not found with this id : " + id));
 		todoRepository.deleteById(id);
+		
 	}
 
 	@Override

@@ -108,20 +108,20 @@
 
 		
 		
-		
+<!--		
 		
 		<dependency>
-    <groupId>io.opentelemetry.instrumentation</groupId>
-    <artifactId>opentelemetry-spring-boot-starter</artifactId>
-    <version>2.1.0-alpha</version>
-</dependency>
+		    <groupId>io.opentelemetry.instrumentation</groupId>
+		    <artifactId>opentelemetry-spring-boot-starter</artifactId>
+		    <version>2.1.0-alpha</version>
+		</dependency>
 
-<!-- https://mvnrepository.com/artifact/io.opentelemetry.instrumentation/opentelemetry-spring-starter -->
-<dependency>
-    <groupId>io.opentelemetry.instrumentation</groupId>
-    <artifactId>opentelemetry-spring-starter</artifactId>
-    <version>1.0.0-alpha</version>
-</dependency>
+ https://mvnrepository.com/artifact/io.opentelemetry.instrumentation/opentelemetry-spring-starter 
+		<dependency>
+		    <groupId>io.opentelemetry.instrumentation</groupId>
+		    <artifactId>opentelemetry-spring-starter</artifactId>
+		    <version>1.0.0-alpha</version>
+		</dependency>-->
 
 		
 		
@@ -153,6 +153,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>spring-boot-docker</finalName>
 	</build>
 
 </project>

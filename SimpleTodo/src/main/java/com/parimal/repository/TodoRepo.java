@@ -19,4 +19,5 @@ public interface TodoRepo extends JpaRepository<Todo, Long>
 	List<Todo> findByTitleContainingIgnoreCase(String searchTerm);
 
 	List<Todo> findByCompleted(boolean done);
+	
 }

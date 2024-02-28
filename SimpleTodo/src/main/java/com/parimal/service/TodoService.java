@@ -27,4 +27,5 @@ public interface TodoService
 	List<Todo> searchTodos(String searchTerm);
 
 	List<Todo> getTodosByCompletion(boolean completed);
+	
 }
